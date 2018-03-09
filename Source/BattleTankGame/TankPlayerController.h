@@ -18,12 +18,18 @@ class BATTLETANKGAME_API ATankPlayerController : public APlayerController
 	GENERATED_BODY()
 
 public:
-	ATank* GetControlledTank() const;
-	
+
+protected:
+
 	void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 
 	//Move the barrel towards crosshair
+
+private:
+
+	ATank* GetControlledTank() const;
+
 	void AimTowardsCrosshair();
 
 	bool GetSightRayHitLocation(FVector&) const;
@@ -32,7 +38,7 @@ public:
 
 	void GetLookDirection(FVector2D&, FVector&) const;
 
-private:
+
 	FString currentPawn;
 
 	UPROPERTY(EditAnywhere)

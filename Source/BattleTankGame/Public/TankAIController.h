@@ -18,11 +18,19 @@ class BATTLETANKGAME_API ATankAIController : public AAIController
 	
 public:
 
+protected:
+
 	virtual void BeginPlay() override;
+
+	virtual void Tick(float DeltaTime) override;
+
+private:
 
 	ATank* GetControlledTank() const;
 	
 	ATank* GetPlayerTank() const;
+
+	FVector GetPlayerLocation();
 
 
 private:
