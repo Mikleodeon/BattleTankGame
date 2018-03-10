@@ -60,6 +60,6 @@ void UTankAimComponent::MoveBarrel(FRotator aimRotation)
 	FRotator newBarrelRotation = FRotator(aimRotation.Pitch, barrelRotation.Yaw, barrelRotation.Roll);
 	FRotator deltaRotation = newBarrelRotation - barrelRotation;
 	UE_LOG(LogTemp, Warning, TEXT("tank %s aim rotation %s"), *GetOwner()->GetName(), *aimRotation.ToString())
-	barrel->SetWorldRotation(newBarrelRotation);
+	barrel->SetWorldRotation(barrelRotation + deltaRotation*0.1);
 }
 
