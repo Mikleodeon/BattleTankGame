@@ -70,7 +70,7 @@ bool ATankPlayerController::GetLookVectorHit(FVector& worldDirection, FVector& h
 		lineTraceEnd,
 		ECollisionChannel::ECC_Visibility);
 
-	if (outHit.GetActor()) { hitLocation = outHit.Location; return true; }
+	if (outHit.GetActor() && outHit.GetActor() != GetControlledTank()){ hitLocation = outHit.Location; return true; }
 	return false;
 }
 

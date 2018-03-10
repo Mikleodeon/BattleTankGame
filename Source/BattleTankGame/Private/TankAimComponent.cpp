@@ -38,7 +38,7 @@ void UTankAimComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	// ...
 }
 
-void UTankAimComponent::Aim(FVector hitLocation, FString& tankName, float launchSpeed)
+void UTankAimComponent::Aim(FVector targetLocation, FString& tankName, float launchSpeed)
 {
 	if (!barrel) { return; }
 
@@ -46,7 +46,7 @@ void UTankAimComponent::Aim(FVector hitLocation, FString& tankName, float launch
 	FVector startLocation = barrel->GetSocketLocation(FName("endBarrel"));
 
 	//Calculate the outLaunchVelocity
-	if (UGameplayStatics::SuggestProjectileVelocity(this, outLaunchVelocity, startLocation, hitLocation, launchSpeed, ESuggestProjVelocityTraceOption::DoNotTrace))
+	if (UGameplayStatics::SuggestProjectileVelocity(this, outLaunchVelocity, startLocation, targetLocation, launchSpeed, false, 0.f, 0.f, ESuggestProjVelocityTraceOption::DoNotTrace))
 	{
 		FVector aimDirection = outLaunchVelocity.GetSafeNormal();
 		
@@ -57,6 +57,9 @@ void UTankAimComponent::Aim(FVector hitLocation, FString& tankName, float launch
 void UTankAimComponent::MoveBarrel(FRotator aimRotation)
 {
 	FRotator barrelRotation = barrel->GetForwardVector().Rotation();
-	FRotator deltaRotation = aimRotation - barrelRotation;
+	FRotator newBarrelRotation = FRotator(aimRotation.Pitch, barrelRotation.Yaw, barrelRotation.Roll);
+	FRotator deltaRotation = newBarrelRotation - barrelRotation;
+	UE_LOG(LogTemp, Warning, TEXT("tank %s aim rotation %s"), *GetOwner()->GetName(), *aimRotation.ToString())
+	barrel->SetWorldRotation(newBarrelRotation);
 }
 
