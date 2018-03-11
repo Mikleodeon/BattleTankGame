@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Tank.h"
+#include "TankBarrel.h"
 
 
 // Sets default values
@@ -39,7 +40,8 @@ void ATank::AimAt(FVector hitLocation)
 	tankAimComponent->Aim(hitLocation, tankName, launchSpeed);
 }
 
-void ATank::SetBarrelReference(UStaticMeshComponent * barrelToSet)
+//Called in blueprint
+void ATank::SetBarrelReference(UTankBarrel* barrelToSet)
 {
 	tankAimComponent->SetBarrelReference(barrelToSet);
 }

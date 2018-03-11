@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankAimComponent.h"
-#include "Components/StaticMeshComponent.h"
+#include "TankBarrel.h"
 
 
 // Sets default values for this component's properties
@@ -16,9 +16,10 @@ UTankAimComponent::UTankAimComponent()
 
 
 
-void UTankAimComponent::SetBarrelReference(UStaticMeshComponent* barrelToSet)
+void UTankAimComponent::SetBarrelReference(UTankBarrel* barrelToSet)
 {
 	barrel = barrelToSet;
+	UE_LOG(LogTemp, Warning, TEXT("SetBarrel"))
 }
 
 // Called when the game starts
@@ -41,6 +42,7 @@ void UTankAimComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 void UTankAimComponent::Aim(FVector targetLocation, FString& tankName, float launchSpeed)
 {
 	if (!barrel) { return; }
+	UE_LOG(LogTemp, Warning, TEXT("Working"))
 
 	FVector outLaunchVelocity;
 	FVector startLocation = barrel->GetSocketLocation(FName("endBarrel"));
@@ -60,6 +62,6 @@ void UTankAimComponent::MoveBarrel(FRotator aimRotation)
 	FRotator newBarrelRotation = FRotator(aimRotation.Pitch, barrelRotation.Yaw, barrelRotation.Roll);
 	FRotator deltaRotation = newBarrelRotation - barrelRotation;
 	UE_LOG(LogTemp, Warning, TEXT("tank %s aim rotation %s"), *GetOwner()->GetName(), *aimRotation.ToString())
-	barrel->SetWorldRotation(barrelRotation + deltaRotation*0.1);
+	barrel->SetWorldRotation(barrelRotation + deltaRotation*0.1f);
 }
 
