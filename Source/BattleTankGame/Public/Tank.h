@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "TankAimComponent.h"
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 
 class UTankBarrel;
+class UTankAimComponent;
 
 UCLASS()
 class BATTLETANKGAME_API ATank : public APawn
@@ -27,7 +27,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UTankAimComponent* tankAimComponent = nullptr;
+	UTankAimComponent* tankAimComponent;
 
 public:	
 	// Called every frame
