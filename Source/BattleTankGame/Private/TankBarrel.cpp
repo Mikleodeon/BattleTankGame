@@ -8,7 +8,7 @@
 
 void UTankBarrel::Pitch(float deltaPitch)
 {
-	float relativeSpeed_Clamp = FMath::Clamp((int)deltaPitch, -1, 1);
+	float relativeSpeed_Clamp = FMath::Clamp(deltaPitch, -1.f, 1.f);
 
 	float pitchChange = deltaPitch * maxDegreesPerSecond * GetWorld()->DeltaTimeSeconds;
 	float newPitch = RelativeRotation.Pitch + pitchChange; //end pitch per frame
