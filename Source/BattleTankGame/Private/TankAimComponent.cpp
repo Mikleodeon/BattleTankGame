@@ -2,6 +2,7 @@
 
 #include "TankAimComponent.h"
 #include "TankBarrel.h"
+#include "TankTurret.h"
 
 
 // Sets default values for this component's properties
@@ -19,7 +20,11 @@ UTankAimComponent::UTankAimComponent()
 void UTankAimComponent::SetBarrelReference(UTankBarrel* barrelToSet)
 {
 	barrel = barrelToSet;
-	UE_LOG(LogTemp, Warning, TEXT("SetBarrel"))
+}
+
+void UTankAimComponent::SetTurretReference(UTankTurret* turretToSet)
+{
+	turret = turretToSet;
 }
 
 // Called when the game starts
@@ -53,15 +58,22 @@ void UTankAimComponent::Aim(FVector targetLocation, FString& tankName, float lau
 		FVector aimDirection = outLaunchVelocity.GetSafeNormal();
 		
 		MoveBarrel(aimDirection.Rotation());
+		MoveTurret(aimDirection.Rotation());
 	}
 }
 
 void UTankAimComponent::MoveBarrel(FRotator aimRotation)
 {
 	FRotator currentBarrelRotation = barrel->GetForwardVector().Rotation();
-	float relativeSpeed = aimRotation.Pitch - currentBarrelRotation.Pitch;
+	float deltaPitch = aimRotation.Pitch - currentBarrelRotation.Pitch;
 	UE_LOG(LogTemp, Warning, TEXT("tank %s aim rotation %s"), *GetOwner()->GetName(), *aimRotation.ToString())
 		//barrel->SetWorldRotation(currentBarrelRotation + deltaRotation*0.1f);
-	barrel->Pitch(relativeSpeed);
+	barrel->Pitch(deltaPitch);
 }
 
+void UTankAimComponent::MoveTurret(FRotator aimRotation)
+{
+	FRotator currentRotation = turret->GetForwardVector().Rotation();
+	float deltaYaw = aimRotation.Yaw - currentRotation.Yaw;
+	turret->Yaw(deltaYaw);
+}

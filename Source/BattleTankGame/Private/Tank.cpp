@@ -3,6 +3,7 @@
 #include "Tank.h"
 #include "TankAimComponent.h"
 #include "TankBarrel.h"
+#include "TankTurret.h"
 
 
 // Sets default values
@@ -35,10 +36,16 @@ void ATank::AimAt(FVector targetLocation)
 	tankAimComponent->Aim(targetLocation, tankName, launchSpeed);
 }
 
-//Called in blueprint
+//Called in blueprint: passes barrel reference to AimComponent
 void ATank::SetBarrelReference(UTankBarrel* barrelToSet)
 {
 	tankAimComponent->SetBarrelReference(barrelToSet);
+}
+
+//Called in blueprint: passes turret reference to AimComponent
+void ATank::SetTurretReference(UTankTurret* turretToSet)
+{
+	tankAimComponent->SetTurretReference(turretToSet);
 }
 
 

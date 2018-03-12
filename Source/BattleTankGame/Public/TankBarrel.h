@@ -15,7 +15,7 @@ class BATTLETANKGAME_API UTankBarrel : public UStaticMeshComponent
 	GENERATED_BODY()
 	
 public:
-	void Pitch(float relativeSpeed);
+	void Pitch(float deltaPitch);
 
 private:
 
