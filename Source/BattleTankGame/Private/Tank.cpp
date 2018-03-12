@@ -9,7 +9,7 @@
 ATank::ATank()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	tankAimComponent = CreateDefaultSubobject<UTankAimComponent>(FName("Aim Component"));
 }
@@ -21,12 +21,6 @@ void ATank::BeginPlay()
 	
 }
 
-// Called every frame
-void ATank::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
 
 // Called to bind functionality to input
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -35,10 +29,10 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
-void ATank::AimAt(FVector hitLocation)
+void ATank::AimAt(FVector targetLocation)
 {
 	FString tankName = GetName();
-	tankAimComponent->Aim(hitLocation, tankName, launchSpeed);
+	tankAimComponent->Aim(targetLocation, tankName, launchSpeed);
 }
 
 //Called in blueprint

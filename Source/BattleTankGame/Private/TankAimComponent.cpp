@@ -9,7 +9,7 @@ UTankAimComponent::UTankAimComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = false;
 
 	// ...
 }
@@ -58,10 +58,10 @@ void UTankAimComponent::Aim(FVector targetLocation, FString& tankName, float lau
 
 void UTankAimComponent::MoveBarrel(FRotator aimRotation)
 {
-	FRotator barrelRotation = barrel->GetForwardVector().Rotation();
-	FRotator newBarrelRotation = FRotator(aimRotation.Pitch, barrelRotation.Yaw, barrelRotation.Roll);
-	FRotator deltaRotation = newBarrelRotation - barrelRotation;
+	FRotator currentBarrelRotation = barrel->GetForwardVector().Rotation();
+	float relativeSpeed = aimRotation.Pitch - currentBarrelRotation.Pitch;
 	UE_LOG(LogTemp, Warning, TEXT("tank %s aim rotation %s"), *GetOwner()->GetName(), *aimRotation.ToString())
-	barrel->SetWorldRotation(barrelRotation + deltaRotation*0.1f);
+		//barrel->SetWorldRotation(currentBarrelRotation + deltaRotation*0.1f);
+	barrel->Pitch(relativeSpeed);
 }
 
