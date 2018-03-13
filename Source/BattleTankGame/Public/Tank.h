@@ -48,5 +48,7 @@ private:
 	UPROPERTY(EditAnywhere, Category = Setup)
 		TSubclassOf<AProjectile> Projectile_BP;
 
+	UTankBarrel* barrel;
+
 	
 };

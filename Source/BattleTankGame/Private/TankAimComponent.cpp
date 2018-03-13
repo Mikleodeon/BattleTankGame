@@ -71,7 +71,7 @@ void UTankAimComponent::MoveBarrel(FRotator aimRotation)
 
 void UTankAimComponent::MoveTurret(FRotator aimRotation)
 {
-	FRotator currentRotation = turret->RelativeRotation;
+	FRotator currentRotation = turret->GetForwardVector().Rotation();
 	float deltaYaw = aimRotation.Yaw - currentRotation.Yaw;
 
 	turret->Yaw(deltaYaw);
