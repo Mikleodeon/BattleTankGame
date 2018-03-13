@@ -47,7 +47,6 @@ void UTankAimComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 void UTankAimComponent::Aim(FVector targetLocation, FString& tankName, float launchSpeed)
 {
 	if (!barrel) { return; }
-	UE_LOG(LogTemp, Warning, TEXT("Working"))
 
 	FVector outLaunchVelocity;
 	FVector startLocation = barrel->GetSocketLocation(FName("endBarrel"));
@@ -66,14 +65,14 @@ void UTankAimComponent::MoveBarrel(FRotator aimRotation)
 {
 	FRotator currentBarrelRotation = barrel->GetForwardVector().Rotation();
 	float deltaPitch = aimRotation.Pitch - currentBarrelRotation.Pitch;
-	UE_LOG(LogTemp, Warning, TEXT("tank %s aim rotation %s"), *GetOwner()->GetName(), *aimRotation.ToString())
-		//barrel->SetWorldRotation(currentBarrelRotation + deltaRotation*0.1f);
+
 	barrel->Pitch(deltaPitch);
 }
 
 void UTankAimComponent::MoveTurret(FRotator aimRotation)
 {
-	FRotator currentRotation = turret->GetForwardVector().Rotation();
+	FRotator currentRotation = turret->RelativeRotation;
 	float deltaYaw = aimRotation.Yaw - currentRotation.Yaw;
+
 	turret->Yaw(deltaYaw);
 }
