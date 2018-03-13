@@ -6,6 +6,7 @@
 #include "TankTurret.h"
 #include "Engine/World.h"
 #include "Projectile.h"
+#include "BulletMovement.h"
 
 
 // Sets default values
@@ -53,9 +54,10 @@ void ATank::SetTurretReference(UTankTurret* turretToSet)
 
 void ATank::Fire() //Called in blueprint
 {
-	UE_LOG(LogTemp, Warning, TEXT("Fire"));
+	AProjectile* projectile = GetWorld()->SpawnActor<AProjectile>(Projectile_BP, barrel->GetSocketLocation(FName("endBarrel")), 
+		barrel->GetSocketRotation(FName("endBarrel")));
 
-	GetWorld()->SpawnActor<AProjectile>(Projectile_BP, barrel->GetSocketLocation(FName("endBarrel")), barrel->GetSocketRotation(FName("endBarrel")));
+	projectile->launchProjectile(launchSpeed);
 }
 
 

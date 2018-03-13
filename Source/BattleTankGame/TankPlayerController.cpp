@@ -9,15 +9,7 @@
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	UE_LOG(LogTemp, Warning, TEXT("PlayerController Begin")); 
 	currentPawn = GetControlledTank()->GetName();
-	if (*currentPawn)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("%s"), *currentPawn);
-	}
-	else {
-		UE_LOG(LogTemp, Warning, TEXT("No Pawn"));
-	}
 }
 
 void ATankPlayerController::Tick(float deltatime)
@@ -71,8 +63,7 @@ bool ATankPlayerController::GetLookVectorHit(FVector& worldDirection, FVector& h
 		outHit,
 		PlayerCameraManager->GetCameraLocation(),
 		lineTraceEnd,
-		ECollisionChannel::ECC_Visibility),
-		FCollisionQueryParams(FName("IgnorePlayer"), false, GetControlledTank());
+		ECollisionChannel::ECC_Visibility);
 
 	if (outHit.GetActor()){ hitLocation = outHit.Location; return true; }
 	return false;

@@ -10,6 +10,7 @@ class UTankBarrel;
 class UTankAimComponent;
 class UTankTurret;
 class AProjectile;
+class UBulletMovement;
 
 UCLASS()
 class BATTLETANKGAME_API ATank : public APawn
@@ -26,9 +27,12 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UTankAimComponent* tankAimComponent;
+
+
 
 private:	
+
+	UTankAimComponent * tankAimComponent;
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void SetBarrelReference(UTankBarrel* barrelToSet);
