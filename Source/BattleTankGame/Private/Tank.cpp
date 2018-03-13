@@ -56,6 +56,7 @@ void ATank::Fire() //Called in blueprint
 {
 	AProjectile* projectile = GetWorld()->SpawnActor<AProjectile>(Projectile_BP, barrel->GetSocketLocation(FName("endBarrel")), 
 		barrel->GetSocketRotation(FName("endBarrel")));
+	if (!projectile) { return; }
 
 	projectile->launchProjectile(launchSpeed);
 }
