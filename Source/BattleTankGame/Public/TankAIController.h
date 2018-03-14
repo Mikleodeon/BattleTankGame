@@ -26,16 +26,8 @@ protected:
 
 private:
 
-	ATank* GetControlledTank() const;
-	
-	ATank* GetPlayerTank() const;
+	ATank* controlledTank;
 
-	FVector GetPlayerLocation();
+	ATank* playerTank;
 
-
-private:
-	FString currentPawn;
-	FString playerTank;
-	
-	
 };

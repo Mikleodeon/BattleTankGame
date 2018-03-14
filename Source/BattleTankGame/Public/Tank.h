@@ -23,11 +23,12 @@ public:
 
 	void AimAt(FVector hitLocation);
 
+	UFUNCTION(BlueprintCallable, Category = Fire)
+		void Fire();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-
 
 
 private:	
@@ -40,9 +41,6 @@ private:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void SetTurretReference(UTankTurret* turretToSet);
 
-	UFUNCTION(BlueprintCallable, Category = Fire)
-		void Fire();
-
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
@@ -54,5 +52,8 @@ private:
 
 	UTankBarrel* barrel;
 
+	float reloadTime = 3;
+
+	double lastFireTime = 0;
 	
 };
