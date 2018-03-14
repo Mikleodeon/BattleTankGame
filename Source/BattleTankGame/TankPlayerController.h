@@ -41,10 +41,10 @@ private:
 
 	FString currentPawn;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 		float crossHairXLocation = 0.5;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 		float crossHairYLocation = 0.566;
 	
 };

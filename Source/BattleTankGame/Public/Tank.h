@@ -37,7 +37,7 @@ private:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	//reference to attached components
-	UTankAimComponent * tankAimComponent;
+	UTankAimComponent* tankAimComponent;
 	UTankBarrel* barrel;
 
 	//setters for references
@@ -47,14 +47,15 @@ private:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void SetTurretReference(UTankTurret* turretToSet);
 
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 		TSubclassOf<AProjectile> Projectile_BP;
 
 	//Variables accessable by BP
-	UPROPERTY(EditAnywhere, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
 		float launchSpeed = 10000; //TODO find sensible default
 
-	float reloadTime = 3;
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+		float reloadTime = 3;
 
 	float lastFireTime = 0;
 	
