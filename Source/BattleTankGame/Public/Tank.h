@@ -33,27 +33,29 @@ protected:
 
 private:	
 
-	UTankAimComponent * tankAimComponent;
+	// Called to bind functionality to input
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	//reference to attached components
+	UTankAimComponent * tankAimComponent;
+	UTankBarrel* barrel;
+
+	//setters for references
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void SetBarrelReference(UTankBarrel* barrelToSet);
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void SetTurretReference(UTankTurret* turretToSet);
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-	UPROPERTY(EditAnywhere, Category = Firing)
-		float launchSpeed = 10000; //TODO find sensible default
-
 	UPROPERTY(EditAnywhere, Category = Setup)
 		TSubclassOf<AProjectile> Projectile_BP;
 
-	UTankBarrel* barrel;
+	//Variables accessable by BP
+	UPROPERTY(EditAnywhere, Category = Firing)
+		float launchSpeed = 10000; //TODO find sensible default
 
 	float reloadTime = 3;
 
-	double lastFireTime = 0;
+	float lastFireTime = 0;
 	
 };
