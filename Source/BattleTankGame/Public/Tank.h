@@ -11,6 +11,7 @@ class UTankAimComponent;
 class UTankTurret;
 class AProjectile;
 class UBulletMovement;
+class UTankMovementComponent;
 
 UCLASS()
 class BATTLETANKGAME_API ATank : public APawn
@@ -27,11 +28,23 @@ public:
 		void Fire();
 
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = Throttle)
-	float forceNewtons = 620000;
+	float forceNewtons = 62000000;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	//reference to attached components
+	UTankAimComponent* tankAimComponent; //sub object created at construction
+
+	UPROPERTY(BlueprintReadOnly, Category = Movement)
+	UTankMovementComponent* tankMoveComponent; //sub object created at construction
+
+
+	UTankBarrel* barrel;
+
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+		TSubclassOf<AProjectile> Projectile_BP;
 
 
 private:	
@@ -39,19 +52,12 @@ private:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	//reference to attached components
-	UTankAimComponent* tankAimComponent;
-	UTankBarrel* barrel;
-
 	//setters for references
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void SetBarrelReference(UTankBarrel* barrelToSet);
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void SetTurretReference(UTankTurret* turretToSet);
-
-	UPROPERTY(EditDefaultsOnly, Category = Setup)
-		TSubclassOf<AProjectile> Projectile_BP;
 
 	//Variables accessable by BP
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
