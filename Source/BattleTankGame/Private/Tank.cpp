@@ -41,19 +41,6 @@ void ATank::AimAt(FVector targetLocation)
 	tankAimComponent->Aim(targetLocation, tankName, launchSpeed);
 }
 
-//Called in blueprint: passes barrel reference to AimComponent
-void ATank::SetBarrelReference(UTankBarrel* barrelToSet)
-{
-	tankAimComponent->SetBarrelReference(barrelToSet);
-	barrel = barrelToSet;
-}
-
-//Called in blueprint: passes turret reference to AimComponent
-void ATank::SetTurretReference(UTankTurret* turretToSet)
-{
-	tankAimComponent->SetTurretReference(turretToSet);
-}
-
 void ATank::Fire() //Called in blueprint
 {
 	float time = GetWorld()->GetTimeSeconds() + 3;

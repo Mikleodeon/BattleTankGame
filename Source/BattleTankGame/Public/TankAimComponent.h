@@ -19,7 +19,10 @@ public:
 	// Sets default values for this component's properties
 	UTankAimComponent();
 
+	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelReference(UTankBarrel* barrelToSet);
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret* turretToSet);
 
 protected:

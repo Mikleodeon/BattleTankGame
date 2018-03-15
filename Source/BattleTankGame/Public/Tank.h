@@ -28,20 +28,22 @@ public:
 		void Fire();
 
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = Throttle)
-	float forceNewtons = 62000000;
+		float forceNewtons = 62000000;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	//reference to attached components
-	UTankAimComponent* tankAimComponent; //sub object created at construction
+
+	UPROPERTY(BlueprintReadOnly, Category = Setup)
+		UTankAimComponent* tankAimComponent; //sub object created at construction
 
 	UPROPERTY(BlueprintReadOnly, Category = Movement)
-	UTankMovementComponent* tankMoveComponent; //sub object created at construction
+		UTankMovementComponent* tankMoveComponent; //sub object created at construction
 
-
-	UTankBarrel* barrel;
+	UPROPERTY(BlueprintReadWrite, Category = Setup)
+		UTankBarrel* barrel;
 
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 		TSubclassOf<AProjectile> Projectile_BP;
@@ -51,13 +53,6 @@ private:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-	//setters for references
-	UFUNCTION(BlueprintCallable, Category = Setup)
-		void SetBarrelReference(UTankBarrel* barrelToSet);
-
-	UFUNCTION(BlueprintCallable, Category = Setup)
-		void SetTurretReference(UTankTurret* turretToSet);
 
 	//Variables accessable by BP
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
