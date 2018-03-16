@@ -20,12 +20,12 @@ void UTankMovementComponent::IntendMoveForward(float relativeSpeed)
 
 void UTankMovementComponent::IntendMoveLeft(float relativeSpeed)
 {
-	leftTrack->SetThrottle(relativeSpeed *-1.f);
-	rightTrack->SetThrottle(relativeSpeed);
+	leftTrack->SetThrottle(relativeSpeed);
+	rightTrack->SetThrottle(relativeSpeed *-1.f);
 }
 
 void UTankMovementComponent::IntendMoveRight(float relativeSpeed)
 {
 	leftTrack->SetThrottle(relativeSpeed);
-	rightTrack->SetThrottle(relativeSpeed *-1.f);
+	rightTrack->SetThrottle(relativeSpeed*-1.f);
 }
