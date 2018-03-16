@@ -27,9 +27,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Fire)
 		void Fire();
 
-	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = Throttle)
-		float forceNewtons = 62000000;
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

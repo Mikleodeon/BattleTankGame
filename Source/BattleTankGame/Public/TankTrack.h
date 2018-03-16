@@ -17,11 +17,14 @@ class BATTLETANKGAME_API UTankTrack : public UStaticMeshComponent
 public:
 
 	UFUNCTION(BlueprintCallable)
-		void SetThrottle(float force, float relativeSpeed);
+		void SetThrottle(float relativeSpeed);
 
 protected:
 
 private:
+
+	UPROPERTY(EditDefaultsOnly, Category = Throttle)
+		float forceNewtons = 62000000;
 
 
 	

@@ -19,6 +19,12 @@ class BATTLETANKGAME_API UTankMovementComponent : public UNavMovementComponent
 public:
 	UFUNCTION(BlueprintCallable, Category = Movement)
 		void IntendMoveForward(float relativeSpeed);
+
+	UFUNCTION(BlueprintCallable, Category = Movement)
+		void IntendMoveLeft(float relativeSpeed);
+
+	UFUNCTION(BlueprintCallable, Category = Movement)
+		void IntendMoveRight(float relativeSpeed);
 	
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void SetTrackReference(UTankTrack* leftTrackToSet, UTankTrack* rightTrackToSet);

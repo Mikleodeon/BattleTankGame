@@ -4,10 +4,10 @@
 
 
 
-void UTankTrack::SetThrottle(float force, float relativeSpeed)
+void UTankTrack::SetThrottle(float relativeSpeed)
 {
 
-	FVector forceApplied = GetForwardVector() * relativeSpeed * force;
+	FVector forceApplied = GetForwardVector() * relativeSpeed * forceNewtons;
 	FVector trackLocation = GetComponentLocation();
 	auto tankRoot = Cast<UPrimitiveComponent>(GetOwner()->GetRootComponent());
 	tankRoot->AddForceAtLocation(forceApplied, trackLocation);

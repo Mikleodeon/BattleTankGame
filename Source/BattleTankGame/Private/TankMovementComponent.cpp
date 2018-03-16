@@ -4,13 +4,28 @@
 #include "TankTrack.h"
 
 
-void UTankMovementComponent::IntendMoveForward(float relativeSpeed)
-{
-	UE_LOG(LogTemp, Warning, TEXT("intend move forward %f"), relativeSpeed);
-}
 
 void UTankMovementComponent::SetTrackReference(UTankTrack* leftTrackToSet, UTankTrack* rightTrackToSet)
 {
 	leftTrack = leftTrackToSet;
 	rightTrack = rightTrackToSet;
+}
+
+
+void UTankMovementComponent::IntendMoveForward(float relativeSpeed)
+{
+	leftTrack->SetThrottle(relativeSpeed);
+	rightTrack->SetThrottle(relativeSpeed);
+}
+
+void UTankMovementComponent::IntendMoveLeft(float relativeSpeed)
+{
+	leftTrack->SetThrottle(relativeSpeed *-1.f);
+	rightTrack->SetThrottle(relativeSpeed);
+}
+
+void UTankMovementComponent::IntendMoveRight(float relativeSpeed)
+{
+	leftTrack->SetThrottle(relativeSpeed);
+	rightTrack->SetThrottle(relativeSpeed *-1.f);
 }
