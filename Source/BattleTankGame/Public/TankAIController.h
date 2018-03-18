@@ -26,8 +26,9 @@ protected:
 
 private:
 
-	ATank* controlledTank;
+	float acceptanceRadius = 1000.f;
 
+	ATank* controlledTank;
 	ATank* playerTank;
 
 };

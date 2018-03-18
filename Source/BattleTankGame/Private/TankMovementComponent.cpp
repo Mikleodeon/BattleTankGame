@@ -11,6 +11,11 @@ void UTankMovementComponent::SetTrackReference(UTankTrack* leftTrackToSet, UTank
 	rightTrack = rightTrackToSet;
 }
 
+void UTankMovementComponent::RequestDirectMove(const FVector & MoveVelocity, bool bForceMaxSpeed)
+{
+	UE_LOG(LogTemp, Warning, TEXT("%s"), *MoveVelocity.ToString());
+}
+
 
 void UTankMovementComponent::IntendMoveForward(float relativeSpeed)
 {
