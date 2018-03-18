@@ -13,7 +13,12 @@ void UTankMovementComponent::SetTrackReference(UTankTrack* leftTrackToSet, UTank
 
 void UTankMovementComponent::RequestDirectMove(const FVector & MoveVelocity, bool bForceMaxSpeed)
 {
-	UE_LOG(LogTemp, Warning, TEXT("%s"), *MoveVelocity.ToString());
+	FVector CurrentDirection = GetOwner()->GetActorForwardVector().GetSafeNormal();
+	FVector EndDirection = MoveVelocity.GetSafeNormal();
+	float AILocSpeed = FVector::DotProduct(CurrentDirection, EndDirection);
+	auto AIRotSpeed = FVector::CrossProduct(CurrentDirection, EndDirection);
+	IntendMoveForward(AILocSpeed);
+	IntendMoveRight(AIRotSpeed.Z);
 }
 
 
@@ -21,12 +26,6 @@ void UTankMovementComponent::IntendMoveForward(float relativeSpeed)
 {
 	leftTrack->SetThrottle(relativeSpeed);
 	rightTrack->SetThrottle(relativeSpeed);
-}
-
-void UTankMovementComponent::IntendMoveLeft(float relativeSpeed)
-{
-	leftTrack->SetThrottle(relativeSpeed);
-	rightTrack->SetThrottle(relativeSpeed *-1.f);
 }
 
 void UTankMovementComponent::IntendMoveRight(float relativeSpeed)

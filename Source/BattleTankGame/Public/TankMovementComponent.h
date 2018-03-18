@@ -21,9 +21,6 @@ public:
 		void IntendMoveForward(float relativeSpeed);
 
 	UFUNCTION(BlueprintCallable, Category = Movement)
-		void IntendMoveLeft(float relativeSpeed);
-
-	UFUNCTION(BlueprintCallable, Category = Movement)
 		void IntendMoveRight(float relativeSpeed);
 	
 	UFUNCTION(BlueprintCallable, Category = Setup)
