@@ -17,10 +17,14 @@ UTankAimComponent::UTankAimComponent()
 
 
 
-void UTankAimComponent::SetComponentReferences(UTankBarrel* barrelToSet, UTankTurret* TurretToSet)
+void UTankAimComponent::SetBarrelReference(UTankBarrel* barrelToSet)
 {
 	barrel = barrelToSet;
-	turret = TurretToSet;
+}
+
+void UTankAimComponent::SetTurretReference(UTankTurret* turretToSet)
+{
+	turret = turretToSet;
 }
 
 // Called when the game starts
