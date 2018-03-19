@@ -26,9 +26,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void SetTrackReference(UTankTrack* leftTrackToSet, UTankTrack* rightTrackToSet);
 
-	virtual void RequestDirectMove(const FVector & MoveVelocity, bool bForceMaxSpeed) override;
-
 private:
+	//Called from pathfinding logic in AI controller
+	void RequestDirectMove(const FVector & MoveVelocity, bool bForceMaxSpeed) override;
 
 	UTankTrack* leftTrack;
 	UTankTrack* rightTrack;

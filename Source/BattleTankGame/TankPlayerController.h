@@ -26,9 +26,10 @@ protected:
 
 	//Move the barrel towards crosshair
 
-private:
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+		ATank* GetControlledTank() const;
 
-	ATank* GetControlledTank() const;
+private:
 
 	void AimTowardsCrosshair();
 
