@@ -28,10 +28,8 @@ public:
 	UTankAimComponent();
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrelReference(UTankBarrel* barrelToSet);
+	void SetComponentReferences(UTankBarrel* barrelToSet, UTankTurret* TurretToSet);
 
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetTurretReference(UTankTurret* turretToSet);
 
 protected:
 	// Called when the game starts

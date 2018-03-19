@@ -33,8 +33,8 @@ protected:
 
 	//reference to attached components
 
-	UPROPERTY(BlueprintReadOnly, Category = Setup)
-		UTankAimComponent* tankAimComponent; //sub object created at construction
+	UPROPERTY(BlueprintReadWrite, Category = Setup)
+		UTankAimComponent* tankAimComponent;
 
 	UPROPERTY(BlueprintReadOnly, Category = Movement)
 		UTankMovementComponent* tankMoveComponent; //sub object created at construction
