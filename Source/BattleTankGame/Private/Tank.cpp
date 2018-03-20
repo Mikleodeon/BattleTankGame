@@ -37,6 +37,7 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 void ATank::AimAt(FVector targetLocation)
 {
 	FString tankName = GetName();
+	if (!ensure(tankAimComponent)) { return; }
 	tankAimComponent->Aim(targetLocation, tankName, launchSpeed);
 }
 
