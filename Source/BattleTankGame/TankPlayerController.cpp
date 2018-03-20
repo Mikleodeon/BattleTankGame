@@ -3,13 +3,20 @@
 #include "TankPlayerController.h"
 #include "Tank.h"
 #include "Engine/World.h"
-#include"DrawDebugHelpers.h"
+#include "DrawDebugHelpers.h"
+#include "TankAimComponent.h"
 
 
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 	currentPawn = GetControlledTank()->GetName();
+	auto AimComp = GetControlledTank()->FindComponentByClass<UTankAimComponent>(); 
+	if (AimComp)
+	{
+		FoundAimComponent(AimComp);
+	} else { UE_LOG(LogTemp, Warning, TEXT("No aim component on player controller")) }
+	
 }
 
 void ATankPlayerController::Tick(float deltatime)

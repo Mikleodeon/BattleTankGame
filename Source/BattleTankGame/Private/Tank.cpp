@@ -22,7 +22,8 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	barrel = FindComponentByClass<UTankBarrel>();
+	tankAimComponent = FindComponentByClass<UTankAimComponent>();
 }
 
 
