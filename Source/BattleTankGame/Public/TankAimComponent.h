@@ -41,6 +41,9 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+	// Called every frame
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
 	UPROPERTY(BlueprintReadOnly, Category = "Status")
 		EFiringStatus FiringStatus = EFiringStatus::Aiming;
 
@@ -48,8 +51,6 @@ protected:
 		TSubclassOf<AProjectile> Projectile_BP;
 
 public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	void Aim(FVector targetLocation, FString&, float);
 

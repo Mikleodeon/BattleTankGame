@@ -23,7 +23,7 @@ public:
 	ATank();
 
 	UPROPERTY(BlueprintReadOnly, Category = Setup)
-		UTankAimComponent* tankAimComponent = nullptr;
+		UTankAimComponent* tankAimComponent;
 
 	UPROPERTY(BlueprintReadOnly, Category = Movement)
 		UTankMovementComponent* tankMoveComponent;
