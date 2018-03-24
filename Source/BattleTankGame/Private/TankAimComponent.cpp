@@ -3,6 +3,9 @@
 #include "TankAimComponent.h"
 #include "TankBarrel.h"
 #include "TankTurret.h"
+#include "Engine/World.h"
+#include "Projectile.h"
+#include "BulletMovement.h"
 
 
 // Sets default values for this component's properties
@@ -71,4 +74,26 @@ void UTankAimComponent::MoveTurret(FRotator aimRotation)
 	float deltaYaw = aimRotation.Yaw - currentRotation.Yaw;
 
 	turret->Yaw(deltaYaw);
+}
+
+void UTankAimComponent::AimAt(FVector targetLocation)
+{
+	FString tankName = GetOwner()->GetName();
+	Aim(targetLocation, tankName, launchSpeed);
+}
+
+void UTankAimComponent::Fire() //Called in blueprint
+{
+	float time = GetWorld()->GetTimeSeconds() + 3;
+	bool isReloaded = (time - lastFireTime) > reloadTime;
+	if (isReloaded)
+	{
+		AProjectile* projectile = GetWorld()->SpawnActor<AProjectile>(Projectile_BP, barrel->GetSocketLocation(FName("endBarrel")),
+			barrel->GetSocketRotation(FName("endBarrel")));
+
+		if (!projectile) { return; }
+
+		projectile->launchProjectile(launchSpeed);
+		lastFireTime = time;
+	}
 }

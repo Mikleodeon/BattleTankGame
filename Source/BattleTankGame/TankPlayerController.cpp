@@ -12,10 +12,8 @@ void ATankPlayerController::BeginPlay()
 	Super::BeginPlay();
 	currentPawn = GetControlledTank()->GetName();
 	auto AimComp = GetControlledTank()->FindComponentByClass<UTankAimComponent>(); 
-	if (ensure(AimComp))
-	{
+	if (!ensure(AimComp)) { return; }
 		FoundAimComponent(AimComp);
-	} else { UE_LOG(LogTemp, Warning, TEXT("No aim component on player controller")) }
 	
 }
 
@@ -37,7 +35,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 	FVector hitLocation; //out parameter
 	if (GetSightRayHitLocation(hitLocation)) //is going to line trace as side-effect
 	{
-		GetControlledTank()->AimAt(hitLocation);
+		GetControlledTank()->tankAimComponent->AimAt(hitLocation);
 	}
 	// Get world location if linetrace through crosshair
 	// return hit and aim at it

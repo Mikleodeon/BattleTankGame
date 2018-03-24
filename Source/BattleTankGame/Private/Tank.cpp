@@ -22,7 +22,6 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-	barrel = FindComponentByClass<UTankBarrel>();
 	tankAimComponent = FindComponentByClass<UTankAimComponent>();
 }
 
@@ -34,28 +33,6 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
-void ATank::AimAt(FVector targetLocation)
-{
-	FString tankName = GetName();
-	if (!ensure(tankAimComponent)) { return; }
-	tankAimComponent->Aim(targetLocation, tankName, launchSpeed);
-}
-
-void ATank::Fire() //Called in blueprint
-{
-	float time = GetWorld()->GetTimeSeconds() + 3;
-	bool isReloaded = (time - lastFireTime) > reloadTime;
-	if (isReloaded)
-	{
-		AProjectile* projectile = GetWorld()->SpawnActor<AProjectile>(Projectile_BP, barrel->GetSocketLocation(FName("endBarrel")),
-			barrel->GetSocketRotation(FName("endBarrel")));
-
-		if (!projectile) { return; }
-
-		projectile->launchProjectile(launchSpeed);
-		lastFireTime = time;
-	}
-}
 
 
 
