@@ -37,7 +37,7 @@ protected:
 		UTankAimComponent* tankAimComponent;
 
 	UPROPERTY(BlueprintReadOnly, Category = Movement)
-		UTankMovementComponent* tankMoveComponent; //sub object created at construction
+		UTankMovementComponent* tankMoveComponent;
 
 	UPROPERTY(BlueprintReadWrite, Category = Setup)
 		UTankBarrel* barrel;

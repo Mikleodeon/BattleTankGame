@@ -12,7 +12,7 @@ void ATankPlayerController::BeginPlay()
 	Super::BeginPlay();
 	currentPawn = GetControlledTank()->GetName();
 	auto AimComp = GetControlledTank()->FindComponentByClass<UTankAimComponent>(); 
-	if (AimComp)
+	if (ensure(AimComp))
 	{
 		FoundAimComponent(AimComp);
 	} else { UE_LOG(LogTemp, Warning, TEXT("No aim component on player controller")) }
