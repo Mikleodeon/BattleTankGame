@@ -34,8 +34,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Fire)
 		void Fire();
 
-	void AimAt(FVector hitLocation);
-
 
 protected:
 	// Called when the game starts
@@ -52,7 +50,7 @@ protected:
 
 public:	
 
-	void Aim(FVector targetLocation, FString&, float);
+	void Aim(FVector targetLocation);
 
 private:
 	UTankBarrel* barrel;
@@ -61,6 +59,8 @@ private:
 	void MoveBarrel(FRotator);
 
 	void MoveTurret(FRotator);
+
+	bool IsBarrelMove();
 	
 	//Variables accessable by BP
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
@@ -70,5 +70,8 @@ private:
 		float reloadTime = 3;
 
 	float lastFireTime = 0;
+
+	FVector aimDirection;
+
 
 };

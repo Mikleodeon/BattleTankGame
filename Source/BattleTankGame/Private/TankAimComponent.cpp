@@ -31,7 +31,6 @@ void UTankAimComponent::BeginPlay()
 {
 	Super::BeginPlay();
 	// ...
-	
 }
 
 
@@ -43,13 +42,17 @@ void UTankAimComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	if (GetWorld()->GetTimeSeconds() + 3 - lastFireTime < reloadTime)
 	{
 		FiringStatus = EFiringStatus::Reloading;
+	} 
+	else if (!IsBarrelMove())
+	{
+		FiringStatus = EFiringStatus::Locked;
 	}
 	else {
 		FiringStatus = EFiringStatus::Aiming;
 	}
 }
 
-void UTankAimComponent::Aim(FVector targetLocation, FString& tankName, float launchSpeed)
+void UTankAimComponent::Aim(FVector targetLocation)
 {
 	if (!barrel) { return; }
 
@@ -57,12 +60,28 @@ void UTankAimComponent::Aim(FVector targetLocation, FString& tankName, float lau
 	FVector startLocation = barrel->GetSocketLocation(FName("endBarrel"));
 
 	//Calculate the outLaunchVelocity
+
 	if (UGameplayStatics::SuggestProjectileVelocity(this, outLaunchVelocity, startLocation, targetLocation, launchSpeed, false, 0.f, 0.f, ESuggestProjVelocityTraceOption::DoNotTrace))
 	{
-		FVector aimDirection = outLaunchVelocity.GetSafeNormal();
-		
+		aimDirection = outLaunchVelocity.GetSafeNormal();
+
 		MoveBarrel(aimDirection.Rotation());
 		MoveTurret(aimDirection.Rotation());
+	}
+}
+
+
+bool UTankAimComponent::IsBarrelMove()
+{
+	FVector BarrelForward = barrel->GetForwardVector();
+	if (BarrelForward.Equals(aimDirection, 0.01f))
+	{
+		return false;
+		float time = GetWorld()->GetTimeSeconds();
+		UE_LOG(LogTemp, Warning, TEXT("%f: Not Moving"), time)
+	}
+	else {
+		return true;
 	}
 }
 
@@ -80,12 +99,6 @@ void UTankAimComponent::MoveTurret(FRotator aimRotation)
 	float deltaYaw = aimRotation.Yaw - currentRotation.Yaw;
 
 	turret->Yaw(deltaYaw);
-}
-
-void UTankAimComponent::AimAt(FVector targetLocation)
-{
-	FString tankName = GetOwner()->GetName();
-	Aim(targetLocation, tankName, launchSpeed);
 }
 
 void UTankAimComponent::Fire() //Called in blueprint
