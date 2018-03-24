@@ -40,7 +40,13 @@ void UTankAimComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	UE_LOG(LogTemp, Warning, TEXT("Aim Comp"));
+	if (GetWorld()->GetTimeSeconds() + 3 - lastFireTime < reloadTime)
+	{
+		FiringStatus = EFiringStatus::Reloading;
+	}
+	else {
+		FiringStatus = EFiringStatus::Aiming;
+	}
 }
 
 void UTankAimComponent::Aim(FVector targetLocation, FString& tankName, float launchSpeed)
@@ -84,9 +90,7 @@ void UTankAimComponent::AimAt(FVector targetLocation)
 
 void UTankAimComponent::Fire() //Called in blueprint
 {
-	float time = GetWorld()->GetTimeSeconds() + 3;
-	bool isReloaded = (time - lastFireTime) > reloadTime;
-	if (isReloaded)
+	if (FiringStatus != EFiringStatus::Reloading)
 	{
 		AProjectile* projectile = GetWorld()->SpawnActor<AProjectile>(Projectile_BP, barrel->GetSocketLocation(FName("endBarrel")),
 			barrel->GetSocketRotation(FName("endBarrel")));
@@ -94,6 +98,6 @@ void UTankAimComponent::Fire() //Called in blueprint
 		if (!projectile) { return; }
 
 		projectile->launchProjectile(launchSpeed);
-		lastFireTime = time;
+		lastFireTime = GetWorld()->GetTimeSeconds() + 3;
 	}
 }
