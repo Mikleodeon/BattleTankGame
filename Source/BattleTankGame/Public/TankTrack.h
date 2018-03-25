@@ -23,6 +23,10 @@ protected:
 
 private:
 
+	UTankTrack();
+
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
 	UPROPERTY(EditDefaultsOnly, Category = Throttle)
 		float forceNewtons = 62000000;
 
