@@ -25,10 +25,20 @@ private:
 
 	UTankTrack();
 
+	virtual void BeginPlay() override;
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	void DriveTrack();
+
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+
+	void ApplySidewaysForce();
 
 	UPROPERTY(EditDefaultsOnly, Category = Throttle)
 		float forceNewtons = 62000000;
+
+	float CurrentThrottle = 0;
 
 
 	
