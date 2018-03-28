@@ -16,6 +16,7 @@ enum class EFiringStatus : uint8
 {
 	Reloading,
 	Aiming,
+	Empty,
 	Locked
 };
 
@@ -54,6 +55,9 @@ public:
 
 	void Aim(FVector targetLocation);
 
+	UFUNCTION(BlueprintCallable, Category = Firing)
+	int GetAmmo() const;
+
 private:
 	UTankBarrel* barrel;
 	UTankTurret* turret;
@@ -72,6 +76,9 @@ private:
 		float reloadTime = 3;
 
 	float lastFireTime = 0;
+
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	int Ammo = 3;
 
 	FVector aimDirection;
 

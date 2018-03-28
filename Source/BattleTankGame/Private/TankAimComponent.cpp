@@ -39,7 +39,11 @@ void UTankAimComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (GetWorld()->GetTimeSeconds() + 3 - lastFireTime < reloadTime)
+	if (Ammo < 1)
+	{
+		FiringStatus = EFiringStatus::Empty;
+	}
+	else if (GetWorld()->GetTimeSeconds() + 3 - lastFireTime < reloadTime)
 	{
 		FiringStatus = EFiringStatus::Reloading;
 	} 
@@ -68,6 +72,11 @@ void UTankAimComponent::Aim(FVector targetLocation)
 		MoveBarrel(aimDirection.Rotation());
 		MoveTurret(aimDirection.Rotation());
 	}
+}
+
+int UTankAimComponent::GetAmmo() const
+{
+	return Ammo;
 }
 
 
@@ -108,12 +117,16 @@ void UTankAimComponent::Fire() //Called in blueprint
 {
 	if (FiringStatus != EFiringStatus::Reloading)
 	{
-		AProjectile* projectile = GetWorld()->SpawnActor<AProjectile>(Projectile_BP, barrel->GetSocketLocation(FName("endBarrel")),
-			barrel->GetSocketRotation(FName("endBarrel")));
+		if (Ammo > 0)
+		{
+			AProjectile* projectile = GetWorld()->SpawnActor<AProjectile>(Projectile_BP, barrel->GetSocketLocation(FName("endBarrel")),
+				barrel->GetSocketRotation(FName("endBarrel")));
 
-		if (!projectile) { return; }
+			if (!projectile) { return; }
 
-		projectile->launchProjectile(launchSpeed);
-		lastFireTime = GetWorld()->GetTimeSeconds() + 3;
+			projectile->launchProjectile(launchSpeed);
+			lastFireTime = GetWorld()->GetTimeSeconds() + 3;
+			Ammo--;
+		}
 	}
 }
