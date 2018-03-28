@@ -42,13 +42,15 @@ protected:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Status")
-		EFiringStatus FiringStatus = EFiringStatus::Aiming;
+
 
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 		TSubclassOf<AProjectile> Projectile_BP;
 
 public:	
+
+	UPROPERTY(BlueprintReadOnly, Category = "Status")
+		EFiringStatus FiringStatus = EFiringStatus::Aiming;
 
 	void Aim(FVector targetLocation);
 
