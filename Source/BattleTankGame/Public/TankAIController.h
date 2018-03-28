@@ -26,7 +26,9 @@ protected:
 
 private:
 
-	float acceptanceRadius = 1000.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	float acceptanceRadius = 8000.f;
 
 	ATank* controlledTank;
 	ATank* playerTank;
