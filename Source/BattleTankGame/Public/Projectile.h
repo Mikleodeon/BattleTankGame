@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "Projectile.generated.h"
 
+
+class UParticleSystemComponent;
 class UBulletMovement;
 UCLASS()
 class BATTLETANKGAME_API AProjectile : public AActor
@@ -32,4 +34,9 @@ private:
 
 	UBulletMovement * bulletMovement;
 	
+	UPROPERTY(VisibleAnywhere, Category = Movement)
+		UStaticMeshComponent* CollisionMesh;
+
+	UPROPERTY(VisibleAnywhere, Category = Movement)
+		UParticleSystemComponent* LaunchBlast;
 };
