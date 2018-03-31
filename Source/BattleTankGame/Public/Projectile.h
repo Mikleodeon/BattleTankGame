@@ -34,9 +34,12 @@ private:
 
 	UBulletMovement * bulletMovement;
 	
-	UPROPERTY(VisibleAnywhere, Category = Movement)
+	UPROPERTY(VisibleAnywhere, Category = Mesh)
 		UStaticMeshComponent* CollisionMesh;
 
-	UPROPERTY(VisibleAnywhere, Category = Movement)
+	UPROPERTY(VisibleAnywhere, Category = Particles)
 		UParticleSystemComponent* LaunchBlast;
+
+	UPROPERTY(VisibleAnywhere, Category = Particles)
+		UParticleSystemComponent* ImpactBlast;
 };
