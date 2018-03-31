@@ -6,7 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Projectile.generated.h"
 
-
+class URadialForceComponent;
 class UParticleSystemComponent;
 class UBulletMovement;
 UCLASS()
@@ -30,13 +30,15 @@ public:
 
 	void launchProjectile(float speed);
 
+
+
 private:
 
 	UFUNCTION()
 		void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 
 	UBulletMovement * bulletMovement;
-	
+
 	UPROPERTY(VisibleAnywhere, Category = Mesh)
 		UStaticMeshComponent* CollisionMesh;
 
@@ -45,4 +47,8 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = Particles)
 		UParticleSystemComponent* ImpactBlast;
+
+	UPROPERTY(VisibleAnywhere, Category = Particles)
+		URadialForceComponent* ExplosionForce;
+
 };
