@@ -48,10 +48,6 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
 	ImpactBlast->Activate();
 	LaunchBlast->Deactivate();
 	ExplosionForce->FireImpulse();
-	if (Hit.Actor != GetWorld()->GetFirstPlayerController()->GetPawn())
-	{
-		ProjectileDmg = 10.f;
-	}
 	UGameplayStatics::ApplyRadialDamage(this, ProjectileDmg, GetActorLocation(), 
 		ExplosionForce->Radius, UDamageType::StaticClass(), TArray<AActor*>());
 

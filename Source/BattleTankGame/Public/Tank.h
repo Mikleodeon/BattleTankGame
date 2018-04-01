@@ -28,6 +28,10 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = Movement)
 		UTankMovementComponent* tankMoveComponent;
 
+	//Returns current health percentage
+	UFUNCTION(BlueprintPure, Category = "Health")
+	float GetHealth();
+
 	//Called by engine when damage is dealt
 	virtual float TakeDamage
 	(
