@@ -45,6 +45,9 @@ protected:
 
 	//reference to attached components
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "Health")
+		void Dead();
+
 private:	
 
 	// Called to bind functionality to input
@@ -55,5 +58,7 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = "Health")
 	int32 CurrentHealth = StartingHealth;
+
+
 
 };

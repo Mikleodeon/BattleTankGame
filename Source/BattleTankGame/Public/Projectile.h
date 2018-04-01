@@ -51,4 +51,7 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = Particles)
 		URadialForceComponent* ExplosionForce;
 
+	UPROPERTY(EditDefaultsOnly, Category = Damage)
+		float ProjectileDmg = 20.f;
+
 };
