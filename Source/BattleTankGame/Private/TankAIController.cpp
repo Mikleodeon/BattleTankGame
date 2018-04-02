@@ -11,7 +11,10 @@ void ATankAIController::BeginPlay()
 	Super::BeginPlay();
 	controlledTank = Cast<ATank>(GetPawn());
 	playerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+
+	controlledTank->OnDeath.AddDynamic(this, &ATankAIController::OnTankDeath);
 }
+
 
 void ATankAIController::Tick(float DeltaTime)
 {
@@ -26,6 +29,11 @@ void ATankAIController::Tick(float DeltaTime)
 	//Fire
 	if (controlledTank->tankAimComponent->FiringStatus == EFiringStatus::Locked)
 		controlledTank->tankAimComponent->Fire();
+}
+
+void ATankAIController::OnTankDeath()
+{
+	Destroy();
 }
 
 

@@ -13,12 +13,19 @@ class AProjectile;
 class UBulletMovement;
 class UTankMovementComponent;
 
+
+
 UCLASS()
 class BATTLETANKGAME_API ATank : public APawn
 {
 	GENERATED_BODY()
 
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTank);
+
 public:
+
+
+
 	// Sets default values for this pawn's properties
 	ATank();
 
@@ -41,16 +48,17 @@ public:
 		AActor * DamageCauser
 	) override;
 
+	UPROPERTY(BlueprintAssignable, Category = "Health")
+		FTank OnDeath;
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "Health")
+		void OnDeath_BP();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	//reference to attached components
-
-	UFUNCTION(BlueprintImplementableEvent, Category = "Health")
-		void Dead();
 
 private:	
 
