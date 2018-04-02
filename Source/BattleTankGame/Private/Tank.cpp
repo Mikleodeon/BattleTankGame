@@ -23,6 +23,7 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 	tankAimComponent = FindComponentByClass<UTankAimComponent>();
+	CurrentHealth = StartingHealth;
 }
 
 

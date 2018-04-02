@@ -69,7 +69,7 @@ bool ATankPlayerController::GetLookVectorHit(FVector& worldDirection, FVector& h
 		PlayerCameraManager->GetCameraLocation(),
 		lineTraceEnd,
 		ECollisionChannel::ECC_Visibility),
-		FCollisionQueryParams(FName("IgnorePlayer"), false, GetControlledTank());
+		FCollisionQueryParams(FName("IgnorePlayer"), true, GetControlledTank());
 
 	if (outHit.GetActor()){ hitLocation = outHit.Location; return true; }
 	return false;
